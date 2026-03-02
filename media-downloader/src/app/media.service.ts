@@ -27,13 +27,13 @@ export interface MediaInfo {
   providedIn: 'root'
 })
 export class MediaService {
-  // Replace with your actual proxy or extraction API endpoint
-  private apiUrl = 'http://localhost:3002/extract'; 
+  private baseUrl = 'https://savesocials.vercel.app';
+  private apiUrl = `${this.baseUrl}/extract`;
 
   constructor(private http: HttpClient) {}
 
   /**
-   * Fetches media information from a given URL using the local backend.
+   * Fetches media information from a given URL using the deployed backend.
    */
   getMediaInfo(url: string): Observable<MediaInfo> {
     console.log('MediaService: Requesting extraction for:', url);
@@ -50,10 +50,10 @@ export class MediaService {
   }
 
   /**
-   * Triggers a browser download for the given URL via the backend proxy.
+   * Triggers a browser download for the given URL via the deployed backend proxy.
    */
   downloadFile(url: string, filename: string, formatId?: string): void {
-    const proxyUrl = `http://localhost:3002/download?url=${encodeURIComponent(url)}&filename=${encodeURIComponent(filename)}&formatId=${encodeURIComponent(formatId || '')}`;
+    const proxyUrl = `${this.baseUrl}/download?url=${encodeURIComponent(url)}&filename=${encodeURIComponent(filename)}&formatId=${encodeURIComponent(formatId || '')}`;
     
     // Direct navigation is more reliable for endpoints that return Content-Disposition: attachment
     window.location.href = proxyUrl;
