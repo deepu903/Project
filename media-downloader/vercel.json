@@ -1,5 +1,5 @@
 {
-  "outputDirectory": "dist/media-downloader",
+  "outputDirectory": "dist/browser",
   "rewrites": [
     {
       "source": "/(.*)",
